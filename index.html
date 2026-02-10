@@ -16,6 +16,62 @@
 </head>
 
 <body>
+    <!-- ===== LANDING SPLASH OVERLAY ===== -->
+    <div class="voyage-splash" id="voyageSplash">
+        <canvas id="splashCanvas"></canvas>
+        <div class="splash-content">
+            <div class="splash-skull">☠️</div>
+            <div class="splash-compass">
+                <svg class="compass-svg" viewBox="0 0 120 120" width="120" height="120">
+                    <circle cx="60" cy="60" r="56" fill="none" stroke="rgba(218,165,32,0.3)" stroke-width="1.5" />
+                    <circle cx="60" cy="60" r="48" fill="none" stroke="rgba(218,165,32,0.15)" stroke-width="1"
+                        stroke-dasharray="4 4" />
+                    <line x1="60" y1="12" x2="60" y2="24" stroke="rgba(218,165,32,0.5)" stroke-width="1.5" />
+                    <line x1="60" y1="96" x2="60" y2="108" stroke="rgba(218,165,32,0.3)" stroke-width="1" />
+                    <line x1="12" y1="60" x2="24" y2="60" stroke="rgba(218,165,32,0.3)" stroke-width="1" />
+                    <line x1="96" y1="60" x2="108" y2="60" stroke="rgba(218,165,32,0.3)" stroke-width="1" />
+                    <!-- Needle -->
+                    <g class="compass-needle-group">
+                        <polygon points="60,18 55,58 60,62 65,58" fill="rgba(218,165,32,0.9)" />
+                        <polygon points="60,102 55,62 60,58 65,62" fill="rgba(192,57,43,0.6)" />
+                        <circle cx="60" cy="60" r="4" fill="#daa520" />
+                    </g>
+                </svg>
+            </div>
+            <h1 class="splash-title">The Grand Line Awaits</h1>
+            <p class="splash-subtitle">The portfolio of <strong>Suriya · D · Palanivel</strong></p>
+            <button class="splash-btn" id="startVoyageBtn">
+                <span class="splash-btn-text">⚓ Start the Voyage</span>
+                <span class="splash-btn-wave"></span>
+            </button>
+            <p class="splash-hint">♪ BGM will play — you can mute anytime</p>
+        </div>
+        <div class="splash-waves">
+            <div class="splash-wave sw-1"></div>
+            <div class="splash-wave sw-2"></div>
+            <div class="splash-wave sw-3"></div>
+        </div>
+    </div>
+
+    <!-- ===== FLOATING MUTE BUTTON ===== -->
+    <button class="sound-toggle" id="soundToggle" aria-label="Toggle background music" title="Toggle BGM">
+        <!-- Unmuted icon -->
+        <svg class="sound-icon sound-on" id="soundOn" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" width="20" height="20">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19" />
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+        </svg>
+        <!-- Muted icon -->
+        <svg class="sound-icon sound-off" id="soundOff" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" width="20" height="20" style="display:none">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19" />
+            <line x1="23" y1="9" x2="17" y2="15" />
+            <line x1="17" y1="9" x2="23" y2="15" />
+        </svg>
+        <span class="sound-pulse" id="soundPulse"></span>
+    </button>
+
     <!-- ===== OCEAN WAVES CANVAS ===== -->
     <canvas id="oceanCanvas"></canvas>
 

@@ -3,6 +3,139 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // ======================================================
+    // SPLASH SCREEN — Star field canvas + Start the Voyage
+    // ======================================================
+    const splash = document.getElementById('voyageSplash');
+    const startBtn = document.getElementById('startVoyageBtn');
+    const splashCanvas = document.getElementById('splashCanvas');
+    const splashCtx = splashCanvas.getContext('2d');
+    const soundToggle = document.getElementById('soundToggle');
+    const soundOn = document.getElementById('soundOn');
+    const soundOff = document.getElementById('soundOff');
+
+    let splashStars = [];
+    let splashAnimId;
+
+    function resizeSplashCanvas() {
+        splashCanvas.width = window.innerWidth;
+        splashCanvas.height = window.innerHeight;
+    }
+    resizeSplashCanvas();
+    window.addEventListener('resize', resizeSplashCanvas);
+
+    // Create twinkling stars for the splash background
+    function initSplashStars() {
+        splashStars = [];
+        const count = Math.min(120, Math.floor(splashCanvas.width * splashCanvas.height / 8000));
+        for (let i = 0; i < count; i++) {
+            splashStars.push({
+                x: Math.random() * splashCanvas.width,
+                y: Math.random() * splashCanvas.height,
+                size: Math.random() * 2 + 0.5,
+                twinkleSpeed: Math.random() * 0.02 + 0.005,
+                twinklePhase: Math.random() * Math.PI * 2,
+                isGold: Math.random() > 0.85,
+                vy: -(Math.random() * 0.15 + 0.02)
+            });
+        }
+    }
+    initSplashStars();
+
+    function drawSplashStars() {
+        splashCtx.clearRect(0, 0, splashCanvas.width, splashCanvas.height);
+        splashStars.forEach(star => {
+            star.twinklePhase += star.twinkleSpeed;
+            star.y += star.vy;
+            if (star.y < -5) { star.y = splashCanvas.height + 5; star.x = Math.random() * splashCanvas.width; }
+
+            const alpha = 0.3 + Math.sin(star.twinklePhase) * 0.3;
+            splashCtx.beginPath();
+            splashCtx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+            if (star.isGold) {
+                splashCtx.fillStyle = `rgba(218,165,32,${alpha})`;
+                splashCtx.shadowBlur = 6;
+                splashCtx.shadowColor = `rgba(218,165,32,${alpha * 0.5})`;
+            } else {
+                splashCtx.fillStyle = `rgba(160,190,220,${alpha * 0.5})`;
+                splashCtx.shadowBlur = 0;
+            }
+            splashCtx.fill();
+            splashCtx.shadowBlur = 0;
+        });
+        splashAnimId = requestAnimationFrame(drawSplashStars);
+    }
+    drawSplashStars();
+
+    // ======================================================
+    // BGM AUDIO SETUP
+    // ======================================================
+    // Place a file called 'bgm.mp3' in the same folder as index.html
+    // (any One Piece OST instrumental or ocean ambience works great)
+    const bgm = new Audio('bgm.mp3');
+    bgm.loop = true;
+    bgm.volume = 0.80;
+    let isMuted = false;
+    let bgmStarted = false;
+
+    function showSoundToggle() {
+        soundToggle.classList.add('visible');
+        soundToggle.classList.add('playing');
+    }
+
+    function updateSoundIcon() {
+        if (isMuted) {
+            soundOn.style.display = 'none';
+            soundOff.style.display = 'block';
+            soundToggle.classList.remove('playing');
+        } else {
+            soundOn.style.display = 'block';
+            soundOff.style.display = 'none';
+            soundToggle.classList.add('playing');
+        }
+    }
+
+    // "Start the Voyage" — dismiss splash + play BGM
+    startBtn.addEventListener('click', () => {
+        // Dismiss splash
+        splash.classList.add('dismissed');
+        cancelAnimationFrame(splashAnimId);
+
+        // Start BGM
+        bgm.play().then(() => {
+            bgmStarted = true;
+            isMuted = false;
+            showSoundToggle();
+            updateSoundIcon();
+        }).catch(err => {
+            console.warn('BGM autoplay blocked:', err);
+            // Still show the toggle so user can try again
+            bgmStarted = true;
+            isMuted = true;
+            showSoundToggle();
+            updateSoundIcon();
+        });
+
+        // Remove splash from DOM after transition
+        setTimeout(() => {
+            splash.style.display = 'none';
+        }, 900);
+    });
+
+    // Mute / Unmute toggle
+    soundToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!bgmStarted) return;
+
+        isMuted = !isMuted;
+        if (isMuted) {
+            bgm.pause();
+        } else {
+            bgm.play().catch(() => { });
+        }
+        updateSoundIcon();
+    });
+
     // ---- Typing Animation (Wanted Poster A.K.A.) ----
     const titles = [
         'MLOps Grand Line Architect',
@@ -424,6 +557,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // CONQUEROR'S HAKI BURST — on click
     // ======================================================
     document.addEventListener('click', (e) => {
+        // Don't burst on interactive elements
+        if (e.target.closest('.voyage-splash') || e.target.closest('.sound-toggle') || e.target.closest('.nav-toggle') || e.target.closest('a') || e.target.closest('button')) return;
         createHakiBurst(e.clientX, e.clientY);
     });
 
