@@ -400,6 +400,10 @@ body {
     font-weight: 400;
 }
 
+body.splash-active {
+    overflow: hidden;
+}
+
 a {
     text-decoration: none;
     color: inherit;
@@ -612,8 +616,17 @@ img {
 
 .logo-skull {
     font-size: 1.6rem;
+    display: flex;
+    align-items: center;
     filter: drop-shadow(0 0 8px rgba(218, 165, 32, 0.3));
     transition: var(--transition);
+}
+
+.nav-flag-img {
+    width: 1em;
+    height: 1em;
+    object-fit: contain;
+    border-radius: 50%;
 }
 
 .nav-logo:hover .logo-skull {
