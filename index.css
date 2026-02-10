@@ -63,17 +63,9 @@
 }
 
 .splash-skull {
+    font-size: 3.4rem;
     filter: drop-shadow(0 0 20px rgba(218, 165, 32, 0.4));
     animation: skullFloat 3s ease-in-out infinite;
-    line-height: 1;
-}
-
-.splash-flag-img {
-    width: 54px;
-    height: 54px;
-    object-fit: contain;
-    border-radius: 50%;
-    display: inline-block;
 }
 
 @keyframes skullFloat {
@@ -408,10 +400,6 @@ body {
     font-weight: 400;
 }
 
-body.splash-active {
-    overflow: hidden;
-}
-
 a {
     text-decoration: none;
     color: inherit;
@@ -623,18 +611,9 @@ img {
 }
 
 .logo-skull {
-    display: flex;
-    align-items: center;
+    font-size: 1.6rem;
     filter: drop-shadow(0 0 8px rgba(218, 165, 32, 0.3));
     transition: var(--transition);
-}
-
-.nav-flag-img {
-    width: 26px;
-    height: 26px;
-    object-fit: contain;
-    border-radius: 50%;
-    display: inline-block;
 }
 
 .nav-logo:hover .logo-skull {

@@ -95,20 +95,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Lock scrolling while splash is active
-    document.body.classList.add('splash-active');
-
     // "Start the Voyage" — dismiss splash + play BGM
     startBtn.addEventListener('click', () => {
-        // Scroll to the very top instantly
-        window.scrollTo(0, 0);
-
         // Dismiss splash
         splash.classList.add('dismissed');
         cancelAnimationFrame(splashAnimId);
-
-        // Unlock body scroll
-        document.body.classList.remove('splash-active');
 
         // Start BGM
         bgm.play().then(() => {
