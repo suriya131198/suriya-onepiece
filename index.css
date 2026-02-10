@@ -62,25 +62,6 @@
     }
 }
 
-.splash-skull {
-    font-size: 3.4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    filter: drop-shadow(0 0 20px rgba(218, 165, 32, 0.4));
-    animation: skullFloat 3s ease-in-out infinite;
-}
-
-.splash-flag-img {
-    width: 3.4rem;
-    height: 3.4rem;
-    max-width: 3.4rem !important;
-    max-height: 3.4rem !important;
-    object-fit: contain;
-    border-radius: 50%;
-    display: inline-block;
-}
-
 @keyframes skullFloat {
 
     0%,
