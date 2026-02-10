@@ -101,6 +101,9 @@ document.addEventListener('DOMContentLoaded', () => {
         splash.classList.add('dismissed');
         cancelAnimationFrame(splashAnimId);
 
+        // Scroll to top so the main page starts at the beginning
+        window.scrollTo(0, 0);
+
         // Start BGM
         bgm.play().then(() => {
             bgmStarted = true;
