@@ -72,10 +72,13 @@
 }
 
 .splash-flag-img {
-    width: 1em;
-    height: 1em;
+    width: 3.4rem;
+    height: 3.4rem;
+    max-width: 3.4rem !important;
+    max-height: 3.4rem !important;
     object-fit: contain;
     border-radius: 50%;
+    display: inline-block;
 }
 
 @keyframes skullFloat {
@@ -633,10 +636,13 @@ img {
 }
 
 .nav-flag-img {
-    width: 1em;
-    height: 1em;
+    width: 1.6rem;
+    height: 1.6rem;
+    max-width: 1.6rem !important;
+    max-height: 1.6rem !important;
     object-fit: contain;
     border-radius: 50%;
+    display: inline-block;
 }
 
 .nav-logo:hover .logo-skull {
