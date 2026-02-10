@@ -63,16 +63,9 @@
 }
 
 .splash-skull {
+    font-size: 3.4rem;
     filter: drop-shadow(0 0 20px rgba(218, 165, 32, 0.4));
     animation: skullFloat 3s ease-in-out infinite;
-    line-height: 1;
-}
-
-.splash-flag-img {
-    width: 54px;
-    height: 54px;
-    object-fit: contain;
-    display: block;
 }
 
 @keyframes skullFloat {
@@ -618,17 +611,9 @@ img {
 }
 
 .logo-skull {
-    display: flex;
-    align-items: center;
+    font-size: 1.6rem;
     filter: drop-shadow(0 0 8px rgba(218, 165, 32, 0.3));
     transition: var(--transition);
-}
-
-.logo-flag-img {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-    display: block;
 }
 
 .nav-logo:hover .logo-skull {
